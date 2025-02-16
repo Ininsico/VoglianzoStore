@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Daniya ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .romantic-font {
+            font-family: 'Dancing Script', cursive;
+        }
+        .content-font {
+            font-family: 'Poppins', sans-serif;
+        }
+        .heart {
+            animation: heartBeat 1.5s infinite;
+        }
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 to-rose-200 min-h-screen flex items-center justify-center content-font">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 text-center space-y-8">
+            <div id="initial-message" class="fade-in">
+                <h1 class="romantic-font text-4xl md:text-6xl mb-6 text-rose-600">Dear Dania</h1>
+                <p class="text-gray-700 text-lg mb-8">I have something special to tell you...</p>
+                <button onclick="startJourney()" class="bg-rose-500 hover:bg-rose-600 text-white px-8 py-3 rounded-full transition-all duration-300 text-lg">
+                    Click to Begin ✨
+                </button>
+            </div>
+
+            <div id="proposal-content" class="hidden space-y-8">
+                <!-- Content will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            {
+                text: "From the moment I first saw you,<br>my world became brighter",
+                icon: "bi-brightness-high"
+            },
+            {
+                text: "Your smile lights up every room<br>and my heart",
+                icon: "bi-heart"
+            },
+            {
+                text: "Every moment with you is precious,<br>and I want to create countless more",
+                icon: "bi-clock-history"
+            },
+            {
+                text: "Dania,<br>Will you be mine forever?",
+                icon: "bi-heart-fill"
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function startJourney() {
+            document.getElementById('initial-message').style.display = 'none';
+            document.getElementById('proposal-content').classList.remove('hidden');
+            showNextMessage();
+        }
+
+        function showNextMessage() {
+            if (currentIndex < messages.length) {
+                const message = messages[currentIndex];
+                const content = document.getElementById('proposal-content');
+                
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'fade-in';
+                messageDiv.innerHTML = `
+                    <i class="bi ${message.icon} text-4xl text-rose-500 mb-4"></i>
+                    <p class="romantic-font text-2xl md:text-3xl text-gray-800 mb-6">${message.text}</p>
+                    ${currentIndex < messages.length - 1 ? 
+                        `<button onclick="showNextMessage()" class="bg-rose-500 hover:bg-rose-600 text-white px-6 py-2 rounded-full transition-all duration-300">
+                            Continue <i class="bi bi-arrow-right"></i>
+                        </button>` :
+                        `<div class="space-y-4">
+                            <i class="bi bi-heart-fill text-5xl text-rose-500 heart"></i>
+                            <div class="space-x-4">
+                                <button onclick="respond(true)" class="bg-rose-500 hover:bg-rose-600 text-white px-8 py-3 rounded-full transition-all duration-300">Yes ❤️</button>
+                                <button onclick="respond(false)" class="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-full transition-all duration-300">I need time</button>
+                            </div>
+                        </div>`
+                    }
+                `;
+                
+                content.innerHTML = '';
+                content.appendChild(messageDiv);
+                currentIndex++;
+            }
+        }
+
+        function respond(accepted) {
+            const content = document.getElementById('proposal-content');
+            content.innerHTML = `
+                <div class="fade-in">
+                    <i class="${accepted ? 'bi bi-heart-fill text-5xl text-rose-500 heart' : 'bi bi-heart text-5xl text-gray-400'} mb-4"></i>
+                    <p class="romantic-font text-3xl text-${accepted ? 'rose' : 'gray'}-600 mb-4">
+                        ${accepted ? 'Thank you for making me the happiest person! ❤️' : 'I understand. Take all the time you need 🌹'}
+                    </p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

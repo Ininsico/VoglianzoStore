@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voglianzo</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #fff;
+            line-height: 1.6;
+           
+        }
+
+       
+        /* Header */
+        header {
+            background-color: #1e1e1e;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #f50057;
+        }
+
+        header p {
+            margin-top: 8px;
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        /* Navigation */
+        nav {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #00bcd4;
+            margin: 0 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #f50057;
+        }
+
+        #categories {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            margin-left: 10px;
+            background-color: #1e1e1e;
+            color: #fff;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        #categories:hover {
+            background-color: #333;
+        }
+
+        /* Banner */
+        .banner {
+            text-align: center;
+            background: url('banner.jpg') no-repeat center center;
+            background-size: cover;
+            padding: 100px 20px;
+            color: #fff;
+        }
+
+        .banner h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        .banner p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        /* Products Section */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .product img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product h3 {
+            margin: 15px 0 10px;
+            color: #f50057;
+            font-size: 1.2rem;
+        }
+
+        .product p {
+            font-size: 1rem;
+            margin: 10px 0;
+            color: #ccc;
+        }
+
+        .product button {
+            background-color: #00bcd4;
+            border: none;
+            padding: 10px 15px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .product button:hover {
+            background-color: #f50057;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e1e1e;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        footer p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .newsletter {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #121212;
+        }
+
+        .newsletter h3 {
+            margin-bottom: 10px;
+            color: #f50057;
+        }
+
+        .newsletter p {
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .newsletter input {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #333;
+            border-radius: 5px;
+            outline: none;
+            width: 250px;
+            margin-right: 10px;
+            transition: border-color 0.3s ease;
+        }
+
+        .newsletter input:focus {
+            border-color: #00bcd4;
+        }
+
+        .newsletter button {
+            padding: 10px 15px;
+            background-color: #00bcd4;
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter button:hover {
+            background-color: #f50057;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: #1e1e1e;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 60%;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #f50057;
+        }
+        
+        .trail {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #00ffcc;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: fade-trail 0.5s ease-out forwards;
+        }
+
+        @keyframes fade-trail {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.2);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Voglianzo</h1>
+        <p>Quality in every stitch</p>
+    </header>
+    <script>
+         // Create a trail effect
+         function createTrail(x, y) {
+            const trail = document.createElement('div');
+            trail.classList.add('trail');
+            document.body.appendChild(trail);
+
+            // Set position of the trail
+            trail.style.left = `${x}px`;
+            trail.style.top = `${y}px`;
+
+            // Remove the trail after animation ends
+            setTimeout(() => {
+                trail.remove();
+            }, 500); // Matches the animation duration
+        }
+
+        // Track mouse movement
+        window.addEventListener('mousemove', (event) => {
+            const { pageX, pageY } = event; // Use pageX and pageY for scrolling support
+            createTrail(pageX, pageY);
+        });
+    </script>
+    
+    <nav>
+        <a href="#home",style="--clr#1e9bff"><span>home</span><i></i></a>
+        <a href="#products">Products</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+        <select id="categories">
+            <option value="all">All Products</option>
+            <option value="hoodies">Hoodies</option>
+            <option value="shirts">Shirts</option>
+            <option value="jackets">Jackets</option>
+            <option value="jeans">Jeans</option>
+        </select>
+    </nav>
+
+    <div class="banner">
+        <h2>Quality in every stitch</h2>
+        <p>Get the best deals on clothes all around</p>
+    </div>
+
+    <section class="products" id="products">
+        <div class="product">
+            <img src="hoodies.png" alt="Hoodies">
+            <h3>Hoodies</h3>
+            <p>3000 PKR</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="shirts.jpg" alt="Shirts">
+            <h3>Shirts</h3>
+            <p>1500 PKR</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="jackets.jpeg" alt="Jackets">
+            <h3>Jackets</h3>
+            <p>2500 PKR</p>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="jeans.jpg" alt="Jeans">
+            <h3>Jeans</h3>
+            <p>1700 PKR</p>
+            <button>Add to Cart</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Voglianzo | All Rights Reserved</p>
+        <div class="newsletter">
+            <h3>Subscribe to Our Newsletter</h3>
+            <p>Get the latest updates and deals!</p>
+            <form action="#" method="POST">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+
+
+
+
